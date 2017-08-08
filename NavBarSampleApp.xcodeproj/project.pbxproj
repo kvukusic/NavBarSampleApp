@@ -1,0 +1,333 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4815FD861F39B9280054EF30 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4815FD851F39B9280054EF30 /* main.m */; };
+		4815FD891F39B9280054EF30 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4815FD881F39B9280054EF30 /* AppDelegate.m */; };
+		4815FD911F39B9280054EF30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4815FD901F39B9280054EF30 /* Assets.xcassets */; };
+		4815FD941F39B9280054EF30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4815FD921F39B9280054EF30 /* LaunchScreen.storyboard */; };
+		4815FD9E1F39B9DD0054EF30 /* NavBarTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4815FD9D1F39B9DD0054EF30 /* NavBarTestViewController.m */; };
+		4815FDA11F39BAD20054EF30 /* DelegateSplitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4815FD9F1F39BAD20054EF30 /* DelegateSplitter.m */; };
+		4815FDA41F39BAE10054EF30 /* NavigationBarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4815FDA31F39BAE10054EF30 /* NavigationBarManager.m */; };
+		4815FDA71F39BAFA0054EF30 /* NavigationBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4815FDA61F39BAFA0054EF30 /* NavigationBarViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4815FD811F39B9280054EF30 /* NavBarSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NavBarSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4815FD851F39B9280054EF30 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4815FD871F39B9280054EF30 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		4815FD881F39B9280054EF30 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		4815FD901F39B9280054EF30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4815FD931F39B9280054EF30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4815FD951F39B9280054EF30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4815FD9C1F39B9DD0054EF30 /* NavBarTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavBarTestViewController.h; sourceTree = "<group>"; };
+		4815FD9D1F39B9DD0054EF30 /* NavBarTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavBarTestViewController.m; sourceTree = "<group>"; };
+		4815FD9F1F39BAD20054EF30 /* DelegateSplitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelegateSplitter.m; sourceTree = "<group>"; };
+		4815FDA01F39BAD20054EF30 /* DelegateSplitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelegateSplitter.h; sourceTree = "<group>"; };
+		4815FDA21F39BAE10054EF30 /* NavigationBarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBarManager.h; sourceTree = "<group>"; };
+		4815FDA31F39BAE10054EF30 /* NavigationBarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBarManager.m; sourceTree = "<group>"; };
+		4815FDA51F39BAFA0054EF30 /* NavigationBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBarViewController.h; sourceTree = "<group>"; };
+		4815FDA61F39BAFA0054EF30 /* NavigationBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBarViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4815FD7E1F39B9280054EF30 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4815FD781F39B9280054EF30 = {
+			isa = PBXGroup;
+			children = (
+				4815FD831F39B9280054EF30 /* NavBarSampleApp */,
+				4815FD821F39B9280054EF30 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4815FD821F39B9280054EF30 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4815FD811F39B9280054EF30 /* NavBarSampleApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4815FD831F39B9280054EF30 /* NavBarSampleApp */ = {
+			isa = PBXGroup;
+			children = (
+				4815FD871F39B9280054EF30 /* AppDelegate.h */,
+				4815FD881F39B9280054EF30 /* AppDelegate.m */,
+				4815FD901F39B9280054EF30 /* Assets.xcassets */,
+				4815FD951F39B9280054EF30 /* Info.plist */,
+				4815FD921F39B9280054EF30 /* LaunchScreen.storyboard */,
+				4815FD9C1F39B9DD0054EF30 /* NavBarTestViewController.h */,
+				4815FD9D1F39B9DD0054EF30 /* NavBarTestViewController.m */,
+				4815FD9B1F39B94B0054EF30 /* NavigationBar */,
+				4815FD841F39B9280054EF30 /* Supporting Files */,
+			);
+			path = NavBarSampleApp;
+			sourceTree = "<group>";
+		};
+		4815FD841F39B9280054EF30 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4815FD851F39B9280054EF30 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4815FD9B1F39B94B0054EF30 /* NavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				4815FDA01F39BAD20054EF30 /* DelegateSplitter.h */,
+				4815FD9F1F39BAD20054EF30 /* DelegateSplitter.m */,
+				4815FDA21F39BAE10054EF30 /* NavigationBarManager.h */,
+				4815FDA31F39BAE10054EF30 /* NavigationBarManager.m */,
+				4815FDA51F39BAFA0054EF30 /* NavigationBarViewController.h */,
+				4815FDA61F39BAFA0054EF30 /* NavigationBarViewController.m */,
+			);
+			path = NavigationBar;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4815FD801F39B9280054EF30 /* NavBarSampleApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4815FD981F39B9280054EF30 /* Build configuration list for PBXNativeTarget "NavBarSampleApp" */;
+			buildPhases = (
+				4815FD7D1F39B9280054EF30 /* Sources */,
+				4815FD7E1F39B9280054EF30 /* Frameworks */,
+				4815FD7F1F39B9280054EF30 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NavBarSampleApp;
+			productName = NavBarSampleApp;
+			productReference = 4815FD811F39B9280054EF30 /* NavBarSampleApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4815FD791F39B9280054EF30 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = Test;
+				TargetAttributes = {
+					4815FD801F39B9280054EF30 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = ACPF4233H8;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 4815FD7C1F39B9280054EF30 /* Build configuration list for PBXProject "NavBarSampleApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4815FD781F39B9280054EF30;
+			productRefGroup = 4815FD821F39B9280054EF30 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4815FD801F39B9280054EF30 /* NavBarSampleApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4815FD7F1F39B9280054EF30 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4815FD941F39B9280054EF30 /* LaunchScreen.storyboard in Resources */,
+				4815FD911F39B9280054EF30 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4815FD7D1F39B9280054EF30 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4815FDA71F39BAFA0054EF30 /* NavigationBarViewController.m in Sources */,
+				4815FDA41F39BAE10054EF30 /* NavigationBarManager.m in Sources */,
+				4815FD9E1F39B9DD0054EF30 /* NavBarTestViewController.m in Sources */,
+				4815FD891F39B9280054EF30 /* AppDelegate.m in Sources */,
+				4815FD861F39B9280054EF30 /* main.m in Sources */,
+				4815FDA11F39BAD20054EF30 /* DelegateSplitter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4815FD921F39B9280054EF30 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4815FD931F39B9280054EF30 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4815FD961F39B9280054EF30 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		4815FD971F39B9280054EF30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4815FD991F39B9280054EF30 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = ACPF4233H8;
+				INFOPLIST_FILE = NavBarSampleApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.navbar.NavBarSampleApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4815FD9A1F39B9280054EF30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = ACPF4233H8;
+				INFOPLIST_FILE = NavBarSampleApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.navbar.NavBarSampleApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4815FD7C1F39B9280054EF30 /* Build configuration list for PBXProject "NavBarSampleApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4815FD961F39B9280054EF30 /* Debug */,
+				4815FD971F39B9280054EF30 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4815FD981F39B9280054EF30 /* Build configuration list for PBXNativeTarget "NavBarSampleApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4815FD991F39B9280054EF30 /* Debug */,
+				4815FD9A1F39B9280054EF30 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4815FD791F39B9280054EF30 /* Project object */;
+}
