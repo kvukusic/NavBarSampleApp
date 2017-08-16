@@ -320,6 +320,8 @@ static NSString * const kContentSizePropertyName = @"contentSize";
         scrollView.contentInset = contentInset;
         scrollView.showsVerticalScrollIndicator = YES;
     }
+
+    [self updateScrollIndicatorInsetsOfScrollView:scrollView];
 }
 
 - (void)addViewControllers:(NSArray *)viewControllers {
