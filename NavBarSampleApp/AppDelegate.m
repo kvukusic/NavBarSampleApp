@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "NavBarTestViewController.h"
+#import "NavBarTestRootViewController.h"
+#import "NavBarTestRootViewController2.h"
 
 @interface AppDelegate ()
 
@@ -18,7 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    UIViewController *vc = [[NavBarTestViewController alloc] init];
+    UIViewController *vc = [[NavBarTestRootViewController alloc] init];
     UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
     vc.title = @"NavBar Title";
 

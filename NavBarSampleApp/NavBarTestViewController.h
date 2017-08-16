@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NavBarTestViewController : UIViewController
+#import "TabStripViewController.h"
+
+@interface NavBarTestViewController : UIViewController <TabStripChildItem>
+
+@property (nonatomic, strong) UITableView *tableView;
+
+- (instancetype)initWithNumberOfItems:(NSInteger)numOfItems;
 
 @end

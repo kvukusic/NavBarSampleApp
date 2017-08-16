@@ -8,54 +8,53 @@
 
 #import "NavBarTestViewController.h"
 
-#import "NavigationBarManager.h"
-#import "NavigationBarViewController.h"
-
-@interface NavBarTestViewController () <UITableViewDataSource, UITableViewDelegate, NavigationBarManagerDelegate>
+@interface NavBarTestViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @end
 
 @implementation NavBarTestViewController {
-    UITableView *_tableView;
-    NavigationBarManager *_navbarManager;
+    NSInteger _numOfItems;
+}
+
+- (void)commonInit
+{
+    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    _tableView.backgroundColor = [UIColor clearColor];
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
+//    _tableView.refreshControl = [[UIRefreshControl alloc] init];
+    [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.view addSubview:_tableView];
+}
+
+- (instancetype)init
+{
+    if (self = [super init]) {
+        [self commonInit];
+        _numOfItems = 100;
+    }
+    return self;
+}
+
+- (instancetype)initWithNumberOfItems:(NSInteger)numOfItems
+{
+    if (self = [super init]) {
+        [self commonInit];
+        _numOfItems = numOfItems;
+    }
+    return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
-    _tableView.dataSource = self;
-    _tableView.delegate = self;
-    [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
-    [self.view addSubview:_tableView];
+    self.automaticallyAdjustsScrollViewInsets = NO;
 
-    _navbarManager = [[NavigationBarManager alloc] initWithViewController:self scrollView:_tableView];
-    _navbarManager.delegate = self;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [_navbarManager viewWillAppear:animated];
-}
-
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    [_navbarManager viewDidLayoutSubviews];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [_navbarManager viewWillDisappear:animated];
-}
-
-- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
-{
-    [_navbarManager shouldScrollToTop];
-    return YES;
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        _numOfItems = 100;
+//        [_tableView reloadData];
+//    });
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -65,7 +64,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 100;
+    return _numOfItems;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -76,19 +75,9 @@
     return cell;
 }
 
-- (void)navigationBarManager:(NavigationBarManager *)manager didChangeStateToState:(NavigationBarState)state
+- (NSString *)tabName
 {
-
-}
-
-- (void)navigationBarManagerDidUpdateScrollViewInsets:(NavigationBarManager *)manager
-{
-
-}
-
-- (BOOL)navigationBarManager:(NavigationBarManager *)manager shouldUpdateScrollViewInsets:(UIEdgeInsets)insets
-{
-    return YES;
+    return [NSString stringWithFormat:@"%@", @(_numOfItems)];
 }
 
 @end
