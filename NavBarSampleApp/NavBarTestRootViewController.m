@@ -89,6 +89,8 @@ static NSString * const kContentSizePropertyName = @"contentSize";
         return;
     }
 
+    NSLog(@"diff 2 offset %f", scrollView.contentOffset.y);
+
     [self handleScrollingOfScrollView:scrollView];
 }
 
@@ -235,6 +237,8 @@ static NSString * const kContentSizePropertyName = @"contentSize";
             UITableView *tableView = [controller performSelector:@selector(tableView)];
             if (tableView != scrollView) {
 
+                NSInteger index = [self.childControllers indexOfObject:controller];
+
                 // calculate needed values
                 CGFloat previousNavigationBarHeight = [self getPreviousNavigationBarHeightForScrollView:tableView];
                 CGFloat navigationBarHeight = _navigationBar.frame.size.height;
@@ -270,6 +274,9 @@ static NSString * const kContentSizePropertyName = @"contentSize";
 
                 // update the scroll indicator insets
                 [self updateScrollIndicatorInsetsOfScrollView:tableView];
+
+                NSLog(@"diff %ld content size %f", index, tableView.contentSize.height);
+                NSLog(@"diff %ld content offset %f", index, tableView.contentOffset.y);
             }
         }
     }
@@ -309,11 +316,20 @@ static NSString * const kContentSizePropertyName = @"contentSize";
 
 - (void)handleContentSizeChangeOfScrollView:(UIScrollView *)scrollView
 {
+    // TODO contentOffset za male contentSize-ove se resetira na -200
+
     if (scrollView.contentSize.height < scrollView.frame.size.height) {
         UIEdgeInsets contentInset = scrollView.contentInset;
         contentInset.bottom = scrollView.frame.size.height - scrollView.contentSize.height - _navigationBar.minimumHeight;
         scrollView.contentInset = contentInset;
-        scrollView.showsVerticalScrollIndicator = NO;
+
+        if (scrollView.contentSize.height > scrollView.frame.size.height - scrollView.contentInset.top) {
+            // if content doesn't fit available space then show scroll indicator
+            scrollView.showsVerticalScrollIndicator = YES;
+        } else {
+            // otherwise there is not need to show scroll indicator
+            scrollView.showsVerticalScrollIndicator = NO;
+        }
     } else {
         UIEdgeInsets contentInset = scrollView.contentInset;
         contentInset.bottom = 0.f;
