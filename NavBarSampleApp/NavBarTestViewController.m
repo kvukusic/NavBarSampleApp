@@ -46,6 +46,13 @@
     return self;
 }
 
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+
+    _tableView.frame = self.view.bounds;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -56,6 +63,8 @@
 //        _numOfItems = 100;
 //        [_tableView reloadData];
 //    });
+
+    NSLog(@"VIEW DID LOAD");
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
