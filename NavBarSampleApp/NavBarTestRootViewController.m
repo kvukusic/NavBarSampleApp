@@ -13,6 +13,9 @@
 #import "DelegateSplitter.h"
 #import "TabStripBarView.h"
 
+static void * const kContentSizeChangeContext = (void*)&kContentSizeChangeContext;
+static NSString * const kContentSizePropertyName = @"contentSize";
+
 @interface NavBarTestRootViewController () <UIScrollViewDelegate>
 
 @property (nonatomic, strong, readonly) NSMutableArray *childControllers;
@@ -76,29 +79,6 @@
     _navigationBar.frame = CGRectMake(0.f, 0.f, self.view.frame.size.width, _navigationBar.frame.size.height);
 
     self.containerView.frame = self.view.bounds;
-}
-
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-
-        for (UIViewController *controller in self.childControllers) {
-            if ([controller respondsToSelector:@selector(tableView)]) {
-                UITableView *tableView = [controller performSelector:@selector(tableView)];
-    
-                if (tableView.contentSize.height < tableView.frame.size.height) {
-                    UIEdgeInsets contentInset = tableView.contentInset;
-                    contentInset.bottom = tableView.frame.size.height - tableView.contentSize.height - _navigationBar.minimumHeight;
-                    tableView.contentInset = contentInset;
-                    tableView.showsVerticalScrollIndicator = NO;
-                } else {
-                    UIEdgeInsets contentInset = tableView.contentInset;
-                    contentInset.bottom = 0.f;
-                    tableView.contentInset = contentInset;
-                    tableView.showsVerticalScrollIndicator = YES;
-                }
-            }
-        }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -187,8 +167,6 @@
     // if scrolling down when not closed
     CGFloat relativeOffset = MAX(0, scrollView.contentOffset.y + _navigationBar.minimumHeight);
 
-    NSLog(@"RELATIVE OFFSET %f", relativeOffset);
-
     CGFloat previousYOffset = [self getPreviousYOffsetOfScrollView:scrollView];
 
     if (!isnan(previousYOffset)) {
@@ -256,24 +234,29 @@
         if ([controller respondsToSelector:@selector(tableView)]) {
             UITableView *tableView = [controller performSelector:@selector(tableView)];
             if (tableView != scrollView) {
+
+                // calculate needed values
                 CGFloat relativeOffset = MAX(0, tableView.contentOffset.y + _navigationBar.minimumHeight);
                 CGFloat previousNavigationBarHeight = [self getPreviousNavigationBarHeightForScrollView:tableView];
                 CGFloat navigationBarHeight = _navigationBar.frame.size.height;
                 CGFloat diff = navigationBarHeight - previousNavigationBarHeight;
 
+                // save and nil delegate
                 id delegate = tableView.delegate;
                 tableView.delegate = nil;
 
                 CGPoint contentOffset = tableView.contentOffset;
                 contentOffset.y -= diff;
 
-                // add correction for refresh control
+                // add correction for refresh control if needed
                 if (tableView.refreshControl.isRefreshing && relativeOffset == 0.f) {
                     contentOffset.y += tableView.refreshControl.bounds.size.height;
                 }
 
+                // set new content offset
                 tableView.contentOffset = contentOffset;
-                
+
+                // restore delegate
                 tableView.delegate = delegate;
 
                 // set the new offset as previous offset
@@ -304,21 +287,36 @@
 
 - (void)updateScrollIndicatorInsetsOfScrollView:(UIScrollView *)scrollView
 {
-//    CGFloat relativeContentOffset = scrollView.contentInset.top + scrollView.contentOffset.y;
-//
-//    CGFloat minimumHeight = _navigationBar.minimumHeight;
-//    CGFloat maximumHeight = _navigationBar.maximumHeight;
+    CGFloat relativeContentOffset = scrollView.contentInset.top + scrollView.contentOffset.y;
+
+    CGFloat minimumHeight = _navigationBar.minimumHeight;
+    CGFloat maximumHeight = _navigationBar.maximumHeight;
     CGFloat height = _navigationBar.frame.size.height;
 
     if (scrollView.contentSize.height > 0.f) {
-//        CGFloat percentageHeight = (scrollView.bounds.size.height - height - minimumHeight) / (scrollView.contentSize.height);
-//
-//        CGFloat scrollY = round(MAX(relativeContentOffset*percentageHeight, 0.f) * 2.f) / 2.f;
-//        NSLog(@"SCROOLL Y %f", scrollY);
+        CGFloat percentageHeight = (scrollView.bounds.size.height - height - minimumHeight) / (scrollView.contentSize.height);
+
+        CGFloat scrollY = round(MAX(relativeContentOffset * percentageHeight, 0.f) * 2.f) / 2.f;
 
         UIEdgeInsets scrollIndicatorInsets = scrollView.scrollIndicatorInsets;
         scrollIndicatorInsets.top = height/* - scrollY*/;
         scrollView.scrollIndicatorInsets = scrollIndicatorInsets;
+    }
+}
+
+- (void)handleContentSizeChangeOfScrollView:(UIScrollView *)scrollView
+{
+    NSLog(@"HADNLE CONTEN SIZE CHANGE");
+    if (scrollView.contentSize.height < scrollView.frame.size.height) {
+        UIEdgeInsets contentInset = scrollView.contentInset;
+        contentInset.bottom = scrollView.frame.size.height - scrollView.contentSize.height - _navigationBar.minimumHeight;
+        scrollView.contentInset = contentInset;
+        scrollView.showsVerticalScrollIndicator = NO;
+    } else {
+        UIEdgeInsets contentInset = scrollView.contentInset;
+        contentInset.bottom = 0.f;
+        scrollView.contentInset = contentInset;
+        scrollView.showsVerticalScrollIndicator = YES;
     }
 }
 
@@ -357,6 +355,14 @@
 
             // set initial scroll indicator inset
             [self updateScrollIndicatorInsetsOfScrollView:tableView];
+
+            // TODO check if tableview already observed
+
+            // add contentSize observer
+            [tableView addObserver:self
+                        forKeyPath:kContentSizePropertyName
+                           options:0
+                           context:kContentSizeChangeContext];
         }
     }
 }
@@ -380,6 +386,37 @@
 - (NSValue *)dictionaryKeyForScrollView:(UIScrollView *)scrollView
 {
     return [NSValue valueWithNonretainedObject:scrollView];
+}
+
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if (context == kContentSizeChangeContext) {
+        UITableView *tableView = (UITableView *)object;
+        [self handleContentSizeChangeOfScrollView:tableView];
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+
+#pragma mark - dealloc
+
+- (void)dealloc
+{
+    for (UIViewController *controller in self.childControllers) {
+        if ([controller respondsToSelector:@selector(tableView)]) {
+            UITableView *tableView = [controller performSelector:@selector(tableView)];
+
+            // remove content size observer
+            [tableView removeObserver:self
+                           forKeyPath:kContentSizePropertyName
+                              context:kContentSizeChangeContext];
+        }
+    }
 }
 
 @end
