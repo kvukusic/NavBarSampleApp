@@ -187,6 +187,8 @@
     // if scrolling down when not closed
     CGFloat relativeOffset = MAX(0, scrollView.contentOffset.y + _navigationBar.minimumHeight);
 
+    NSLog(@"RELATIVE OFFSET %f", relativeOffset);
+
     CGFloat previousYOffset = [self getPreviousYOffsetOfScrollView:scrollView];
 
     if (!isnan(previousYOffset)) {
@@ -206,14 +208,6 @@
     if (scrollView.contentOffset.y >= -_navigationBar.minimumHeight &&
         _navigationBar.frame.size.height == _navigationBar.minimumHeight) {
         return NO;
-    }
-
-    // if refreshing
-    if ([scrollView respondsToSelector:@selector(refreshControl)]) {
-        UIRefreshControl *refreshControl = [scrollView performSelector:@selector(refreshControl)];
-        if (refreshControl.isRefreshing) {
-            return NO;
-        }
     }
 
     return YES;
@@ -262,6 +256,7 @@
         if ([controller respondsToSelector:@selector(tableView)]) {
             UITableView *tableView = [controller performSelector:@selector(tableView)];
             if (tableView != scrollView) {
+                CGFloat relativeOffset = MAX(0, tableView.contentOffset.y + _navigationBar.minimumHeight);
                 CGFloat previousNavigationBarHeight = [self getPreviousNavigationBarHeightForScrollView:tableView];
                 CGFloat navigationBarHeight = _navigationBar.frame.size.height;
                 CGFloat diff = navigationBarHeight - previousNavigationBarHeight;
@@ -271,6 +266,12 @@
 
                 CGPoint contentOffset = tableView.contentOffset;
                 contentOffset.y -= diff;
+
+                // add correction for refresh control
+                if (tableView.refreshControl.isRefreshing && relativeOffset == 0.f) {
+                    contentOffset.y += tableView.refreshControl.bounds.size.height;
+                }
+
                 tableView.contentOffset = contentOffset;
                 
                 tableView.delegate = delegate;
