@@ -23,6 +23,7 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.refreshControl = [[UIRefreshControl alloc] init];
+    [_tableView.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     [self.view addSubview:_tableView];
 }
@@ -73,6 +74,13 @@
     cell.textLabel.text = [NSString stringWithFormat:@"row %ld", indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+- (void)refresh:(id)sender
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [_tableView.refreshControl endRefreshing];
+    });
 }
 
 - (NSString *)tabName

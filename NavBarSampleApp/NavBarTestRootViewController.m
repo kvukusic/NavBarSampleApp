@@ -236,7 +236,6 @@ static NSString * const kContentSizePropertyName = @"contentSize";
             if (tableView != scrollView) {
 
                 // calculate needed values
-                CGFloat relativeOffset = MAX(0, tableView.contentOffset.y + _navigationBar.minimumHeight);
                 CGFloat previousNavigationBarHeight = [self getPreviousNavigationBarHeightForScrollView:tableView];
                 CGFloat navigationBarHeight = _navigationBar.frame.size.height;
                 CGFloat diff = navigationBarHeight - previousNavigationBarHeight;
@@ -248,9 +247,13 @@ static NSString * const kContentSizePropertyName = @"contentSize";
                 CGPoint contentOffset = tableView.contentOffset;
                 contentOffset.y -= diff;
 
-                // add correction for refresh control if needed
-                if (tableView.refreshControl.isRefreshing && relativeOffset == 0.f) {
-                    contentOffset.y += tableView.refreshControl.bounds.size.height;
+                // add correction for refresh control if refreshing
+                if (tableView.refreshControl.isRefreshing) {
+                    // add correction only if refresh control is visible
+                    if (tableView.contentOffset.y < -_navigationBar.maximumHeight) {
+                        CGFloat diff = tableView.contentOffset.y + _navigationBar.maximumHeight;
+                        contentOffset.y -= diff;
+                    }
                 }
 
                 // set new content offset
@@ -306,7 +309,6 @@ static NSString * const kContentSizePropertyName = @"contentSize";
 
 - (void)handleContentSizeChangeOfScrollView:(UIScrollView *)scrollView
 {
-    NSLog(@"HADNLE CONTEN SIZE CHANGE");
     if (scrollView.contentSize.height < scrollView.frame.size.height) {
         UIEdgeInsets contentInset = scrollView.contentInset;
         contentInset.bottom = scrollView.frame.size.height - scrollView.contentSize.height - _navigationBar.minimumHeight;
