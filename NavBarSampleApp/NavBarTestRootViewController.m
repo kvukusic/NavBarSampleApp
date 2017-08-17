@@ -205,14 +205,17 @@ static NSString * const kContentSizePropertyName = @"contentSize";
         // calculate the delta
         CGFloat deltaY = previousYOffset - scrollView.contentOffset.y;
 
-        // ignore any scrollOffset beyond the bounds
-        CGFloat start = -scrollView.contentInset.top;
-        if (previousYOffset < start) {
-            deltaY = MIN(0, deltaY - previousYOffset - start);
+        // ignore any scrollOffset beyond bounds
+        if (previousYOffset < -_navigationBar.maximumHeight) {
+            deltaY = MIN(0, deltaY - previousYOffset - _navigationBar.maximumHeight);
+        }
+
+        if (previousYOffset < 0.f && previousYOffset > -_navigationBar.minimumHeight) {
+            deltaY = MIN(deltaY, deltaY - previousYOffset - _navigationBar.minimumHeight);
         }
 
         CGFloat end = scrollView.contentSize.height - scrollView.bounds.size.height + scrollView.contentInset.bottom;
-        if (previousYOffset > end) {
+        if (scrollView.contentSize.height > scrollView.bounds.size.height && previousYOffset > end) {
             deltaY = MAX(0, deltaY - previousYOffset + end);
         }
 
@@ -234,8 +237,6 @@ static NSString * const kContentSizePropertyName = @"contentSize";
         if ([controller respondsToSelector:@selector(tableView)]) {
             UITableView *tableView = [controller performSelector:@selector(tableView)];
             if (tableView != scrollView) {
-
-                NSInteger index = [self.childControllers indexOfObject:controller];
 
                 // calculate needed values
                 CGFloat previousNavigationBarHeight = [self getPreviousNavigationBarHeightForScrollView:tableView];
@@ -311,6 +312,8 @@ static NSString * const kContentSizePropertyName = @"contentSize";
 
 - (void)handleContentSizeChangeOfScrollView:(UIScrollView *)scrollView
 {
+    // TODO kada je u landscape orijentaciji i offset je veci nego sto moze biti u portrait orijentaiciji, onda se offset resetira na -200
+
     if (scrollView.contentSize.height < scrollView.frame.size.height) {
         UIEdgeInsets contentInset = scrollView.contentInset;
         contentInset.bottom = scrollView.frame.size.height - scrollView.contentSize.height - _navigationBar.minimumHeight;

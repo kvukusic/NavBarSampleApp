@@ -22,7 +22,7 @@
     _tableView.backgroundColor = [UIColor clearColor];
     _tableView.dataSource = self;
     _tableView.delegate = self;
-    _tableView.refreshControl = [[UIRefreshControl alloc] init];
+//    _tableView.refreshControl = [[UIRefreshControl alloc] init];
     [_tableView.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     [self.view addSubview:_tableView];
