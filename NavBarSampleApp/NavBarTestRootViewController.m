@@ -89,8 +89,6 @@ static NSString * const kContentSizePropertyName = @"contentSize";
         return;
     }
 
-    NSLog(@"diff 2 offset %f", scrollView.contentOffset.y);
-
     [self handleScrollingOfScrollView:scrollView];
 }
 
@@ -274,9 +272,6 @@ static NSString * const kContentSizePropertyName = @"contentSize";
 
                 // update the scroll indicator insets
                 [self updateScrollIndicatorInsetsOfScrollView:tableView];
-
-                NSLog(@"diff %ld content size %f", index, tableView.contentSize.height);
-                NSLog(@"diff %ld content offset %f", index, tableView.contentOffset.y);
             }
         }
     }
@@ -316,8 +311,6 @@ static NSString * const kContentSizePropertyName = @"contentSize";
 
 - (void)handleContentSizeChangeOfScrollView:(UIScrollView *)scrollView
 {
-    // TODO contentOffset za male contentSize-ove se resetira na -200
-
     if (scrollView.contentSize.height < scrollView.frame.size.height) {
         UIEdgeInsets contentInset = scrollView.contentInset;
         contentInset.bottom = scrollView.frame.size.height - scrollView.contentSize.height - _navigationBar.minimumHeight;
@@ -375,6 +368,11 @@ static NSString * const kContentSizePropertyName = @"contentSize";
 
             // set initial scroll indicator inset
             [self updateScrollIndicatorInsetsOfScrollView:tableView];
+
+            // the content size height is probably zero here
+            // this is done to allow scroll offset synchronization for table views with smaller
+            // content sizes
+            [self handleContentSizeChangeOfScrollView:tableView];
 
             // TODO check if tableview already observed
 
