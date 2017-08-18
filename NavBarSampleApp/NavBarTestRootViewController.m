@@ -165,14 +165,12 @@ static NSString * const kContentSizePropertyName = @"contentSize";
     }
 
     // if scrolling down when not closed
-    CGFloat relativeOffset = MAX(0, scrollView.contentOffset.y + _navigationBar.minimumHeight);
-
     CGFloat previousYOffset = [self getPreviousYOffsetOfScrollView:scrollView];
-
     if (!isnan(previousYOffset)) {
+        CGFloat relativeOffset = MAX(0, scrollView.contentOffset.y + _navigationBar.minimumHeight);
         CGFloat deltaY = previousYOffset - scrollView.contentOffset.y;
         if (deltaY > 0.f && relativeOffset > 0) {
-            return NO;
+            return NO; // TODO problem ako je relativeOffset > 0 ali navbar height > minimum
         }
     }
 
@@ -205,15 +203,19 @@ static NSString * const kContentSizePropertyName = @"contentSize";
         // calculate the delta
         CGFloat deltaY = previousYOffset - scrollView.contentOffset.y;
 
-        // ignore any scrollOffset beyond bounds
+        // delta correction for fast scrolling upwards when navigation bar is open
         if (previousYOffset < -_navigationBar.maximumHeight) {
             deltaY = MIN(0, deltaY - previousYOffset - _navigationBar.maximumHeight);
         }
 
+        // delta correction when fast scrolling downwards when navigation bar is closed
         if (previousYOffset < 0.f && previousYOffset > -_navigationBar.minimumHeight) {
-            deltaY = MIN(deltaY, deltaY - previousYOffset - _navigationBar.minimumHeight);
+            if (deltaY > 0.f) {
+                deltaY = MIN(deltaY, deltaY - previousYOffset - _navigationBar.minimumHeight);
+            }
         }
 
+        // delta correction when scrolling below bottom
         CGFloat end = scrollView.contentSize.height - scrollView.bounds.size.height + scrollView.contentInset.bottom;
         if (scrollView.contentSize.height > scrollView.bounds.size.height && previousYOffset > end) {
             deltaY = MAX(0, deltaY - previousYOffset + end);
