@@ -314,8 +314,6 @@ static NSString * const kContentSizePropertyName = @"contentSize";
 
 - (void)handleContentSizeChangeOfScrollView:(UIScrollView *)scrollView
 {
-    // TODO kada je u landscape orijentaciji i offset je veci nego sto moze biti u portrait orijentaiciji, onda se offset resetira na -200
-
     if (scrollView.contentSize.height < scrollView.frame.size.height) {
         UIEdgeInsets contentInset = scrollView.contentInset;
         contentInset.bottom = scrollView.frame.size.height - scrollView.contentSize.height - _navigationBar.minimumHeight;
