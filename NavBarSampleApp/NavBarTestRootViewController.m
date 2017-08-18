@@ -295,19 +295,31 @@ static NSString * const kContentSizePropertyName = @"contentSize";
 
 - (void)updateScrollIndicatorInsetsOfScrollView:(UIScrollView *)scrollView
 {
-    CGFloat relativeContentOffset = scrollView.contentInset.top + scrollView.contentOffset.y;
-
-    CGFloat minimumHeight = _navigationBar.minimumHeight;
-    CGFloat maximumHeight = _navigationBar.maximumHeight;
     CGFloat height = _navigationBar.frame.size.height;
+    CGFloat relativeContentOffset = MIN(scrollView.contentInset.top + scrollView.contentOffset.y,
+                                        _navigationBar.maximumHeight - _navigationBar.minimumHeight);
 
     if (scrollView.contentSize.height > 0.f) {
-        CGFloat percentageHeight = (scrollView.bounds.size.height - height - minimumHeight) / (scrollView.contentSize.height);
 
-        CGFloat scrollY = round(MAX(relativeContentOffset * percentageHeight, 0.f) * 2.f) / 2.f;
+        // calculate the scroll indicator correction by iterating N times and recalculating the correction
+        // with the applied correction from the previous iteration
+        NSInteger i = 0;
+        CGFloat scrollIndicatorCorrection = 0.f;
+        const NSInteger maxIterations = 10;
+        while (i++ < maxIterations) {
+            CGFloat scrollableContent = scrollView.contentInset.top + scrollView.contentSize.height + scrollView.contentInset.bottom;
+            CGFloat visibleContent = scrollView.bounds.size.height - height + scrollIndicatorCorrection;
+            CGFloat percentageHeight = visibleContent / scrollableContent;
+            CGFloat temp = round(MAX(relativeContentOffset * percentageHeight, 0.f) * 2.f) / 2.f;
+            if (temp != scrollIndicatorCorrection) {
+                scrollIndicatorCorrection = temp;
+            } else {
+                break;
+            }
+        }
 
         UIEdgeInsets scrollIndicatorInsets = scrollView.scrollIndicatorInsets;
-        scrollIndicatorInsets.top = height/* - scrollY*/;
+        scrollIndicatorInsets.top = height - scrollIndicatorCorrection;
         scrollView.scrollIndicatorInsets = scrollIndicatorInsets;
     }
 }
