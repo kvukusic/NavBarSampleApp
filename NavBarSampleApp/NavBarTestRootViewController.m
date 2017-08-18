@@ -295,8 +295,8 @@ static NSString * const kContentSizePropertyName = @"contentSize";
 
 - (void)updateScrollIndicatorInsetsOfScrollView:(UIScrollView *)scrollView
 {
-    CGFloat height = _navigationBar.frame.size.height;
-    CGFloat relativeContentOffset = MIN(scrollView.contentInset.top + scrollView.contentOffset.y,
+    CGFloat navigationBarHeight = _navigationBar.frame.size.height;
+    CGFloat relativeContentOffset = MIN(_navigationBar.maximumHeight + scrollView.contentOffset.y,
                                         _navigationBar.maximumHeight - _navigationBar.minimumHeight);
 
     if (scrollView.contentSize.height > 0.f) {
@@ -308,7 +308,7 @@ static NSString * const kContentSizePropertyName = @"contentSize";
         const NSInteger maxIterations = 10;
         while (i++ < maxIterations) {
             CGFloat scrollableContent = scrollView.contentInset.top + scrollView.contentSize.height + scrollView.contentInset.bottom;
-            CGFloat visibleContent = scrollView.bounds.size.height - height + scrollIndicatorCorrection;
+            CGFloat visibleContent = scrollView.bounds.size.height - navigationBarHeight + scrollIndicatorCorrection;
             CGFloat percentageHeight = visibleContent / scrollableContent;
             CGFloat temp = round(MAX(relativeContentOffset * percentageHeight, 0.f) * 2.f) / 2.f;
             if (temp != scrollIndicatorCorrection) {
@@ -319,7 +319,7 @@ static NSString * const kContentSizePropertyName = @"contentSize";
         }
 
         UIEdgeInsets scrollIndicatorInsets = scrollView.scrollIndicatorInsets;
-        scrollIndicatorInsets.top = height - scrollIndicatorCorrection;
+        scrollIndicatorInsets.top = navigationBarHeight - scrollIndicatorCorrection;
         scrollView.scrollIndicatorInsets = scrollIndicatorInsets;
     }
 }
