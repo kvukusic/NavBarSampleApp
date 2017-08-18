@@ -170,7 +170,7 @@ static NSString * const kContentSizePropertyName = @"contentSize";
         CGFloat relativeOffset = MAX(0, scrollView.contentOffset.y + _navigationBar.minimumHeight);
         CGFloat deltaY = previousYOffset - scrollView.contentOffset.y;
         if (deltaY > 0.f && relativeOffset > 0) {
-            return NO; // TODO problem ako je relativeOffset > 0 ali navbar height > minimum
+            return NO; // TODO problem when relativeOffset > 0 but navbar height > minimum navbar height
         }
     }
 
