@@ -16,7 +16,6 @@
 		4815FDB11F3AF5C20054EF30 /* NavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4815FDB01F3AF5C20054EF30 /* NavigationBar.m */; };
 		4815FDB71F3B1ACF0054EF30 /* TabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4815FDB31F3B1ACF0054EF30 /* TabStripViewController.m */; };
 		4815FDB81F3B1ACF0054EF30 /* TabStripBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4815FDB61F3B1ACF0054EF30 /* TabStripBarView.m */; };
-		4815FDBB1F3DD0240054EF30 /* NavBarTestRootViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 4815FDBA1F3DD0240054EF30 /* NavBarTestRootViewController2.m */; };
 		48FF916F1F432A77008F209A /* NavBarTestRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FF916E1F432A77008F209A /* NavBarTestRootViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -38,8 +37,6 @@
 		4815FDB41F3B1ACF0054EF30 /* TabStripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabStripViewController.h; sourceTree = "<group>"; };
 		4815FDB51F3B1ACF0054EF30 /* TabStripBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabStripBarView.h; sourceTree = "<group>"; };
 		4815FDB61F3B1ACF0054EF30 /* TabStripBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabStripBarView.m; sourceTree = "<group>"; };
-		4815FDB91F3DD0240054EF30 /* NavBarTestRootViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavBarTestRootViewController2.h; sourceTree = "<group>"; };
-		4815FDBA1F3DD0240054EF30 /* NavBarTestRootViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavBarTestRootViewController2.m; sourceTree = "<group>"; };
 		48FF916D1F432A77008F209A /* NavBarTestRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavBarTestRootViewController.h; sourceTree = "<group>"; };
 		48FF916E1F432A77008F209A /* NavBarTestRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavBarTestRootViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,8 +78,6 @@
 				4815FD921F39B9280054EF30 /* LaunchScreen.storyboard */,
 				48FF916D1F432A77008F209A /* NavBarTestRootViewController.h */,
 				48FF916E1F432A77008F209A /* NavBarTestRootViewController.m */,
-				4815FDB91F3DD0240054EF30 /* NavBarTestRootViewController2.h */,
-				4815FDBA1F3DD0240054EF30 /* NavBarTestRootViewController2.m */,
 				4815FD9C1F39B9DD0054EF30 /* NavBarTestViewController.h */,
 				4815FD9D1F39B9DD0054EF30 /* NavBarTestViewController.m */,
 				4815FD9B1F39B94B0054EF30 /* NavigationBar */,
@@ -194,7 +189,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4815FDB81F3B1ACF0054EF30 /* TabStripBarView.m in Sources */,
-				4815FDBB1F3DD0240054EF30 /* NavBarTestRootViewController2.m in Sources */,
 				4815FD9E1F39B9DD0054EF30 /* NavBarTestViewController.m in Sources */,
 				4815FD891F39B9280054EF30 /* AppDelegate.m in Sources */,
 				4815FD861F39B9280054EF30 /* main.m in Sources */,

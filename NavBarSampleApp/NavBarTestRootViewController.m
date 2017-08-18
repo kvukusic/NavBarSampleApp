@@ -29,7 +29,7 @@ static NSString * const kContentSizePropertyName = @"contentSize";
     NSMutableArray *_delegateSplitters;
 
     NSMutableDictionary<NSValue *, NSNumber *> *_previousOffsets;
-    NSMutableDictionary<NSValue *, NSNumber *> *_previousNavigationBarHeights; // TODO mozda se moze maknut
+    NSMutableDictionary<NSValue *, NSNumber *> *_previousNavigationBarHeights;
 }
 
 - (void)viewDidLoad
@@ -254,7 +254,7 @@ static NSString * const kContentSizePropertyName = @"contentSize";
 
                 // add correction for refresh control if refreshing
                 if (tableView.refreshControl.isRefreshing) {
-                    // add correction only if refresh control is visible
+                    // add correction only if refresh control is visible (above content)
                     if (tableView.contentOffset.y < -_navigationBar.maximumHeight) {
                         CGFloat diff = tableView.contentOffset.y + _navigationBar.maximumHeight;
                         contentOffset.y -= diff;
